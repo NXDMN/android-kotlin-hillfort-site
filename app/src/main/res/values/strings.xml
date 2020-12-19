@@ -1,0 +1,13 @@
+<resources>
+<!--  manifest-->
+  <string name="app_name">Site</string>
+<!--  activity_site.xml-->
+  <string name="hint_siteName">Site Name</string>
+  <string name="button_addSite">Add Site</string>
+  <string name="hint_siteDescription">Description</string>
+<!--  menu_main.xml-->
+  <string name="menu_addSite">Add</string>
+<!--  menu_site.xml-->
+  <string name="menu_cancelSite">Cancel</string>
+
+</resources>
