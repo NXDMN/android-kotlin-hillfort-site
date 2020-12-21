@@ -4,7 +4,6 @@ import android.app.Application
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.site.models.SiteMemStore
-import org.wit.site.models.SiteModel
 
 class MainApp : Application(), AnkoLogger {
 

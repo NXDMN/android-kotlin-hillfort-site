@@ -1,5 +1,6 @@
 package org.wit.site.acivities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,9 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.site.R
+import org.wit.site.helpers.readImage
+import org.wit.site.helpers.readImageFromPath
+import org.wit.site.helpers.showImagePicker
 import org.wit.site.main.MainApp
 import org.wit.site.models.SiteModel
 
@@ -16,6 +20,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
   var site = SiteModel()
   lateinit var app: MainApp
+  val IMAGE_REQUEST = 1
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,24 +31,36 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     app = application as MainApp
 
+    var edit = false
+
     if (intent.hasExtra("site_edit")) {
+      edit = true
       site = intent.extras?.getParcelable<SiteModel>("site_edit")!!
       siteName.setText(site.name)
       description.setText(site.description)
+      siteImage.setImageBitmap(readImageFromPath(this, site.image))
+      btnAdd.setText(R.string.save_site)
     }
 
     btnAdd.setOnClickListener() {
       site.name = siteName.text.toString()
       site.description = description.text.toString()
-      if (site.name.isNotEmpty()) {
-        app.sites.create(site.copy())
-        info("add Button Pressed: $site")
-        setResult(AppCompatActivity.RESULT_OK)
-        finish()
+      if (site.name.isEmpty()) {
+        toast (R.string.enter_site_name)
+      } else {
+        if (edit) {
+          app.sites.update(site.copy())
+        } else {
+          app.sites.create(site.copy())
+        }
       }
-      else {
-        toast ("Please Enter a name")
-      }
+      info("add Button Pressed: $siteName")
+      setResult(AppCompatActivity.RESULT_OK)
+      finish()
+    }
+
+    chooseImage.setOnClickListener {
+      showImagePicker(this, IMAGE_REQUEST)
     }
   }
 
@@ -59,5 +76,17 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
       }
     }
     return super.onOptionsItemSelected(item)
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    when (requestCode) {
+      IMAGE_REQUEST -> {
+        if (data != null) {
+          site.image = data.getData().toString()
+          siteImage.setImageBitmap(readImage(this, resultCode, data))
+        }
+      }
+    }
   }
 }
