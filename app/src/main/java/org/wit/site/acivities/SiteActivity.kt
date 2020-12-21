@@ -8,12 +8,14 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.site.R
 import org.wit.site.helpers.readImage
 import org.wit.site.helpers.readImageFromPath
 import org.wit.site.helpers.showImagePicker
 import org.wit.site.main.MainApp
+import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 
 class SiteActivity : AppCompatActivity(), AnkoLogger {
@@ -21,6 +23,8 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
   var site = SiteModel()
   lateinit var app: MainApp
   val IMAGE_REQUEST = 1
+  val LOCATION_REQUEST = 2
+  var location = Location(52.245696, -7.139102, 15f)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -39,6 +43,9 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
       siteName.setText(site.name)
       description.setText(site.description)
       siteImage.setImageBitmap(readImageFromPath(this, site.image))
+      if (site.image != null) {
+        chooseImage.setText(R.string.change_site_image)
+      }
       btnAdd.setText(R.string.save_site)
     }
 
@@ -61,6 +68,10 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     chooseImage.setOnClickListener {
       showImagePicker(this, IMAGE_REQUEST)
+    }
+
+    siteLocation.setOnClickListener {
+      startActivityForResult(intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
   }
 
@@ -85,6 +96,12 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
         if (data != null) {
           site.image = data.getData().toString()
           siteImage.setImageBitmap(readImage(this, resultCode, data))
+          chooseImage.setText(R.string.change_site_image)
+        }
+      }
+      LOCATION_REQUEST -> {
+        if (data != null) {
+          location = data.extras?.getParcelable<Location>("location")!!
         }
       }
     }

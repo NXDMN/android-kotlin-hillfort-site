@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_site.view.*
 import org.wit.site.R
+import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.SiteModel
 
 interface SiteListener {
@@ -39,6 +40,7 @@ class SiteAdapter constructor(
         fun bind(site: SiteModel, listener: SiteListener) {
             itemView.cardSiteName.text = site.name
             itemView.cardDescription.text = site.description
+            itemView.cardSiteImage.setImageBitmap(readImageFromPath(itemView.context, site.image))
             itemView.setOnClickListener{listener.onSiteClick(site)}
         }
     }

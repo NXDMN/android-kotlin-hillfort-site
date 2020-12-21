@@ -1,19 +1,22 @@
 <resources>
-<!--  manifest-->
+  <!--  manifest-->
   <string name="app_name">Site</string>
-<!--  activity_site.xml-->
+  <string name="title_activity_map">Map</string>
+  <!--  activity_site.xml-->
   <string name="hint_siteName">Site Name</string>
   <string name="button_addSite">Add Site</string>
   <string name="hint_siteDescription">Description</string>
   <string name="button_addImage"> Add Image </string>
-<!--  menu_main.xml-->
+  <string name="button_location">Set Location</string>
+  <!--  menu_main.xml-->
   <string name="menu_addSite">Add</string>
-<!--  menu_site.xml-->
+  <!--  menu_site.xml-->
   <string name="menu_cancelSite">Cancel</string>
-<!--  SiteActivity-->
+  <!--  SiteActivity-->
   <string name="enter_site_name"> Please enter a Site Name</string>
   <string name="save_site"> Save Site</string>
-<!--  ImageHelpers-->
+  <string name="change_site_image">Change site image</string>
+  <!--  ImageHelpers-->
   <string name="select_site_image">Select site image</string>
 
 
