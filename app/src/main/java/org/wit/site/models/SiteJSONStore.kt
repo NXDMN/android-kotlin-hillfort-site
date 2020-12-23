@@ -41,7 +41,8 @@ class SiteJSONStore : SiteStore, AnkoLogger {
 
 
     override fun update(site: SiteModel) {
-        var foundSite: SiteModel? = sites.find { s -> s.id == site.id }
+        val sitesList = findAll() as ArrayList<SiteModel>
+        var foundSite: SiteModel? = sitesList.find { s -> s.id == site.id }
         if (foundSite != null) {
             foundSite.name = site.name
             foundSite.description = site.description
@@ -49,8 +50,13 @@ class SiteJSONStore : SiteStore, AnkoLogger {
             foundSite.lat = site.lat
             foundSite.lng = site.lng
             foundSite.zoom = site.zoom
-            serialize()
         }
+        serialize()
+    }
+
+    override fun delete(site: SiteModel) {
+        sites.remove(site)
+        serialize()
     }
 
     private fun serialize() {

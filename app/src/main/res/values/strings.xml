@@ -2,6 +2,7 @@
   <!--  manifest-->
   <string name="app_name">Site</string>
   <string name="title_activity_map">Map</string>
+  <string name="title_activity_site_maps">Map for all sites</string>
   <!--  activity_site.xml-->
   <string name="hint_siteName">Site Name</string>
   <string name="button_addSite">Add Site</string>
@@ -12,12 +13,17 @@
   <string name="menu_addSite">Add</string>
   <!--  menu_site.xml-->
   <string name="menu_cancelSite">Cancel</string>
+  <string name="menu_deleteSite">Delete</string>
   <!--  SiteActivity-->
   <string name="enter_site_name"> Please enter a Site Name</string>
   <string name="save_site"> Save Site</string>
   <string name="change_site_image">Change site image</string>
   <!--  ImageHelpers-->
   <string name="select_site_image">Select site image</string>
+<!--  activity_site_maps-->
+  <string name="site_image_placeholder">Site Image</string>
+  <string name="site_name_placeholder">Site Name</string>
+  <string name="site_description_placeholder">Site Description</string>
 
 
 </resources>

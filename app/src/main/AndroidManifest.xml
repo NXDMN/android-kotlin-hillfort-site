@@ -5,14 +5,17 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
   <application
-    android:name=".main.MainApp"
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.Site">
-    <activity android:name=".acivities.SiteActivity"></activity>
+      android:name=".main.MainApp"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:supportsRtl="true"
+      android:theme="@style/Theme.Site">
+    <activity
+        android:name=".acivities.SiteMapsActivity"
+        android:label="@string/title_activity_site_maps"></activity>
+    <activity android:name=".acivities.SiteActivity" />
     <activity android:name=".acivities.SiteListActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -27,7 +30,7 @@
 
     <activity
         android:name=".acivities.MapActivity"
-        android:label="@string/title_activity_map"></activity>
+        android:label="@string/title_activity_map" />
   </application>
 
 </manifest>
