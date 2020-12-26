@@ -12,17 +12,19 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.Site">
-    <activity
-        android:name=".acivities.SiteMapsActivity"
-        android:label="@string/title_activity_site_maps"></activity>
-    <activity android:name=".acivities.SiteActivity" />
-    <activity android:name=".acivities.SiteListActivity">
+    <activity android:name=".splash.SplashScreen"
+        android:theme="@style/SplashTheme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity
+        android:name=".acivities.SiteMapsActivity"
+        android:label="@string/title_activity_site_maps"></activity>
+    <activity android:name=".acivities.SiteActivity" />
+    <activity android:name=".acivities.SiteListActivity"/>
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
