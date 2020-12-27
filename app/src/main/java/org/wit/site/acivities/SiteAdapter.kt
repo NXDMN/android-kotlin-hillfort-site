@@ -40,6 +40,10 @@ class SiteAdapter constructor(
         fun bind(site: SiteModel, listener: SiteListener) {
             itemView.cardSiteName.text = site.name
             itemView.cardDescription.text = site.description
+            if(site.visited)
+                itemView.cardVisited.setText(R.string.visited)
+            else
+                itemView.cardVisited.setText(R.string.not_visited)
             itemView.cardSiteImage.setImageBitmap(readImageFromPath(itemView.context, site.image))
             itemView.setOnClickListener{listener.onSiteClick(site)}
         }

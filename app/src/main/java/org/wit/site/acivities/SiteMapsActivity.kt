@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_site_maps.*
 import org.wit.site.R
+import org.wit.site.helpers.readImageFromPath
 import org.wit.site.main.MainApp
 
 class SiteMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
@@ -42,8 +43,12 @@ class SiteMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
   }
 
   override fun onMarkerClick(marker: Marker): Boolean {
-    currentName.text = marker.title
-    return false
+    val tag = marker.tag as Long
+    val site = app.sites.findById(tag)
+    currentName.text = site!!.name
+    currentDescription.text = site!!.description
+    currentImage.setImageBitmap(readImageFromPath(this, site.image))
+    return true
   }
 
   override fun onDestroy() {

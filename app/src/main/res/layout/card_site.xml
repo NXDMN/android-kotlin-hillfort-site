@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/cardSiteImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="16dp"
@@ -28,13 +28,21 @@
         android:layout_toEndOf="@+id/cardSiteImage"
         android:textSize="30sp"/>
 
-
     <TextView
         android:id="@+id/cardDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cardSiteName"
         android:layout_toEndOf="@+id/cardSiteImage"/>
+
+    <TextView
+        android:id="@+id/cardVisited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardDescription"
+        android:layout_toEndOf="@+id/cardSiteImage"/>
+
+
 
   </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -1,10 +1,11 @@
 package org.wit.site.acivities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -41,6 +42,12 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
       site = intent.extras?.getParcelable<SiteModel>("site_edit")!!
       siteName.setText(site.name)
       description.setText(site.description)
+      visited.setChecked(site.visited)
+      if (visited.isChecked) {
+        dateVisited.setVisibility(View.VISIBLE)
+      }
+      dateVisited.setText(site.date)
+      additionalNotes.setText(site.notes)
       siteImage.setImageBitmap(readImageFromPath(this, site.image))
       if (site.image != null) {
         chooseImage.setText(R.string.change_site_image)
@@ -48,11 +55,24 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
       btnAdd.setText(R.string.save_site)
     }
 
+    visited.setOnCheckedChangeListener() { buttonView, isChecked ->
+      if (isChecked) {
+        dateVisited.setVisibility(View.VISIBLE)
+      }
+      else{
+        dateVisited.setVisibility(View.INVISIBLE)
+        dateVisited.text.clear()
+      }
+    }
+
     btnAdd.setOnClickListener() {
       site.name = siteName.text.toString()
       site.description = description.text.toString()
+      site.visited = visited.isChecked
+      site.date = dateVisited.text.toString()
+      site.notes = additionalNotes.text.toString()
       if (site.name.isEmpty()) {
-        toast (R.string.enter_site_name)
+        toast(R.string.enter_site_name)
       } else {
         if (edit) {
           app.sites.update(site.copy())
