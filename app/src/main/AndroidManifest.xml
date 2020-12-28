@@ -21,17 +21,17 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".acivities.SiteMapsActivity"
+        android:name=".views.map.SiteMapView"
         android:label="@string/title_activity_site_maps"></activity>
-    <activity android:name=".acivities.SiteActivity" />
-    <activity android:name=".acivities.SiteListActivity"/>
+    <activity android:name=".views.site.SiteView" />
+    <activity android:name=".views.sitelist.SiteListView"/>
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />
 
     <activity
-        android:name=".acivities.MapActivity"
+        android:name=".views.location.EditLocationView"
         android:label="@string/title_activity_map" />
   </application>
 

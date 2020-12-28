@@ -5,7 +5,6 @@
   <string name="title_activity_site_maps">Map for all sites</string>
   <!--  activity_site.xml-->
   <string name="hint_siteName">Site Name</string>
-  <string name="button_addSite">Add Site</string>
   <string name="hint_siteDescription">Description</string>
   <string name="checkbox_visited">Visited</string>
   <string name="hint_date_visited">Date visited </string>
@@ -17,9 +16,9 @@
   <!--  menu_site.xml-->
   <string name="menu_cancelSite">Cancel</string>
   <string name="menu_deleteSite">Delete</string>
-  <!--  SiteActivity-->
+  <string name="menu_saveSite">Save</string>
+  <!--  SiteView-->
   <string name="enter_site_name"> Please enter a Site Name</string>
-  <string name="save_site"> Save Site</string>
   <string name="change_site_image">Change site image</string>
 <!--  SiteAdapter-->
   <string name="visited">Visited</string>

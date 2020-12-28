@@ -1,4 +1,4 @@
-package org.wit.site.acivities
+package org.wit.site.views.sitelist
 
 import android.view.LayoutInflater
 import android.view.View

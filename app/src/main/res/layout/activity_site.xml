@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".acivities.SiteActivity">
+    tools:context=".views.site.SiteView">
 
   <RelativeLayout
       android:layout_width="match_parent"
@@ -71,27 +71,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/siteImage" />
-
-      <Button
-          android:id="@+id/btnAdd"
-          android:layout_width="match_parent"
-          android:layout_height="48dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginEnd="8dp"
-          android:layout_marginBottom="16dp"
-          android:background="@color/colorAccent"
-          android:paddingTop="8dp"
-          android:paddingBottom="8dp"
-          android:stateListAnimator="@null"
-          android:text="@string/button_addSite"
-          android:textColor="@color/colorPrimary"
-          android:textSize="16sp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/additionalNotes"
-          app:layout_constraintVertical_bias="0.005" />
 
       <EditText
           android:id="@+id/description"

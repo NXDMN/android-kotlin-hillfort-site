@@ -58,6 +58,8 @@ class SiteJSONStore : SiteStore, AnkoLogger {
     }
 
     override fun delete(site: SiteModel) {
+//        val foundSite: SiteModel? = sites.find { it.id == site.id }
+//        sites.remove(foundSite)
         sites.remove(site)
         serialize()
     }

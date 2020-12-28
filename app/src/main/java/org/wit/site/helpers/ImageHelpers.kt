@@ -13,6 +13,7 @@ import java.io.IOException
 fun showImagePicker(parent: Activity, id: Int) {
   val intent = Intent()
   intent.type = "image/*"
+//  intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
   intent.action = Intent.ACTION_OPEN_DOCUMENT
   intent.addCategory(Intent.CATEGORY_OPENABLE)
   val chooser = Intent.createChooser(intent, R.string.select_site_image.toString())
