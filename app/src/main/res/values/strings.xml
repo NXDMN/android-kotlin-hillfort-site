@@ -9,7 +9,6 @@
   <string name="checkbox_visited">Visited</string>
   <string name="hint_date_visited">Date visited </string>
   <string name="button_addImage"> Add Image </string>
-  <string name="button_location">Set Location</string>
   <string name="hint_additionalNotes">Additional notes</string>
   <!--  menu_main.xml-->
   <string name="menu_addSite">Add</string>

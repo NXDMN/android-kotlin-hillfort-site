@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -17,14 +18,21 @@ class SiteView : BaseView(), AnkoLogger {
 
   lateinit var presenter: SitePresenter
   var site = SiteModel()
+  lateinit var map: GoogleMap
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_site)
-
     init(toolbarAdd)
 
     presenter = initPresenter(SitePresenter(this)) as SitePresenter
+
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync {
+      map = it
+      presenter.doConfigureMap(map)
+      it.setOnMapClickListener { presenter.doSetLocation() }
+    }
 
     visited.setOnCheckedChangeListener() { buttonView, isChecked ->
       if (isChecked) {
@@ -44,15 +52,6 @@ class SiteView : BaseView(), AnkoLogger {
                           additionalNotes.text.toString())
       presenter.doSelectImage()
     }
-
-    siteLocation.setOnClickListener {
-      presenter.cacheSite(siteName.text.toString(),
-                          description.text.toString(),
-                          visited.isChecked,
-                          dateVisited.text.toString(),
-                          additionalNotes.text.toString())
-      presenter.doSetLocation()
-    }
   }
 
   override fun showSite(site: SiteModel){
@@ -68,6 +67,8 @@ class SiteView : BaseView(), AnkoLogger {
     if (site.image != null) {
       chooseImage.setText(R.string.change_site_image)
     }
+    lat.setText("%.6f".format(site.lat))
+    lng.setText("%.6f".format(site.lng))
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -92,6 +93,9 @@ class SiteView : BaseView(), AnkoLogger {
                                 additionalNotes.text.toString())
         }
       }
+      R.id.item_cancel -> {
+        finish()
+      }
     }
     return super.onOptionsItemSelected(item)
   }
@@ -105,5 +109,31 @@ class SiteView : BaseView(), AnkoLogger {
 
   override fun onBackPressed() {
     presenter.doCancel()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    mapView.onDestroy()
+  }
+
+  override fun onLowMemory() {
+    super.onLowMemory()
+    mapView.onLowMemory()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mapView.onPause()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    mapView.onResume()
+    presenter.doResartLocationUpdates()
+  }
+
+  override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    mapView.onSaveInstanceState(outState)
   }
 }
