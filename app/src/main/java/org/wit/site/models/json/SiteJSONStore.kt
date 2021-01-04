@@ -1,4 +1,4 @@
-package org.wit.site.models
+package org.wit.site.models.json
 
 import android.content.Context
 import com.google.gson.Gson
@@ -8,6 +8,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.wit.site.helpers.exists
 import org.wit.site.helpers.read
 import org.wit.site.helpers.write
+import org.wit.site.models.SiteModel
+import org.wit.site.models.SiteStore
 import java.util.*
 
 val JSON_FILE = "placemarks.json"
@@ -50,9 +52,7 @@ class SiteJSONStore : SiteStore, AnkoLogger {
             foundSite.date = site.date
             foundSite.notes = site.notes
             foundSite.image = site.image
-            foundSite.lat = site.lat
-            foundSite.lng = site.lng
-            foundSite.zoom = site.zoom
+            foundSite.location = site.location
         }
         serialize()
     }

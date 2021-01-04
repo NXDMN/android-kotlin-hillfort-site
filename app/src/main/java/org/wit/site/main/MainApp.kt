@@ -3,9 +3,10 @@ package org.wit.site.main
 import android.app.Application
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.wit.site.models.SiteJSONStore
-import org.wit.site.models.SiteMemStore
 import org.wit.site.models.SiteStore
+import org.wit.site.models.json.SiteJSONStore
+import org.wit.site.models.mem.SiteMemStore
+import org.wit.site.room.SiteStoreRoom
 
 class MainApp : Application(), AnkoLogger {
 
@@ -13,7 +14,9 @@ class MainApp : Application(), AnkoLogger {
 
   override fun onCreate() {
     super.onCreate()
-    sites = SiteJSONStore(applicationContext)
+//    sites = SiteMemStore()
+//    sites = SiteJSONStore(applicationContext)
+    sites = SiteStoreRoom(applicationContext)
     info("Site started")
   }
 }

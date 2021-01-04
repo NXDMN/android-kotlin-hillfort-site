@@ -1,5 +1,7 @@
 package org.wit.site.views.sitelist
 
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.site.models.SiteModel
 import org.wit.site.views.BasePresenter
 import org.wit.site.views.BaseView
@@ -19,7 +21,16 @@ class SiteListPresenter(view: BaseView) : BasePresenter(view) {
     view?.navigateTo(VIEW.MAPS)
   }
 
+  fun doLogout() {
+    view?.navigateTo(VIEW.LOGIN)
+  }
+
   fun loadSites() {
-    view?.showSites(app.sites.findAll())
+    doAsync {
+      val sites = app.sites.findAll()
+      uiThread {
+        view?.showSites(sites)
+      }
+    }
   }
 }

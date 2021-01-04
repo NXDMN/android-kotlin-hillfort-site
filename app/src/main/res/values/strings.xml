@@ -1,8 +1,11 @@
 <resources>
-  <!--  manifest-->
+<!--  manifest-->
   <string name="app_name">Hillfort Sites</string>
   <string name="title_activity_map">Map</string>
   <string name="title_activity_site_maps">Map for all sites</string>
+  <string name="title_activity_site_list">Sites</string>
+  <string name="title_activity_site">Site</string>
+  <string name="title_activity_login"> Signup/Login to Site</string>
   <!--  activity_site.xml-->
   <string name="hint_siteName">Site Name</string>
   <string name="hint_siteDescription">Description</string>
@@ -10,19 +13,21 @@
   <string name="hint_date_visited">Date visited </string>
   <string name="button_addImage"> Add Image </string>
   <string name="hint_additionalNotes">Additional notes</string>
-  <!--  menu_main.xml-->
+<!--  menu_main.xml-->
   <string name="menu_addSite">Add</string>
-  <!--  menu_site.xml-->
+  <string name="menu_showMap">Show Map</string>
+  <string name="menu_logout">Logout</string>
+<!--  menu_site.xml-->
   <string name="menu_cancelSite">Cancel</string>
   <string name="menu_deleteSite">Delete</string>
   <string name="menu_saveSite">Save</string>
-  <!--  SiteView-->
+<!--  SiteView-->
   <string name="enter_site_name"> Please enter a Site Name</string>
   <string name="change_site_image">Change site image</string>
 <!--  SiteAdapter-->
   <string name="visited">Visited</string>
   <string name="not_visited">Not visited</string>
-  <!--  ImageHelpers-->
+<!--  ImageHelpers-->
   <string name="select_site_image">Select site image</string>
 <!--  activity_site_maps-->
   <string name="site_image_placeholder">Site Image</string>

@@ -5,8 +5,10 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
+import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.location.EditLocationView
+import org.wit.site.views.login.LoginView
 import org.wit.site.views.map.SiteMapView
 import org.wit.site.views.site.SiteView
 import org.wit.site.views.sitelist.SiteListView
@@ -15,7 +17,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, SITE, MAPS, LIST
+  LOCATION, SITE, MAPS, LIST, LOGIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -29,6 +31,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.SITE -> intent = Intent(this, SiteView::class.java)
       VIEW.MAPS -> intent = Intent(this, SiteMapView::class.java)
       VIEW.LIST -> intent = Intent(this, SiteListView::class.java)
+      VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
@@ -41,9 +44,10 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
     return presenter
   }
 
-  fun init(toolbar: Toolbar) {
+  fun init(toolbar: Toolbar, upEnabled: Boolean) {
     toolbar.title = title
     setSupportActionBar(toolbar)
+    supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
   }
 
   override fun onDestroy() {
@@ -65,6 +69,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
   open fun showSite(site: SiteModel) {}
   open fun showSites(sites: List<SiteModel>) {}
+  open fun showLocation(location: Location) {}
   open fun showProgress() {}
   open fun hideProgress() {}
 }

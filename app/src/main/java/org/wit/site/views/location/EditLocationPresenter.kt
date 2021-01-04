@@ -27,6 +27,7 @@ class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
         .position(loc)
     map.addMarker(options)
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+    view?.showLocation(location);
   }
 
   fun doUpdateLocation(lat: Double, lng: Double) {

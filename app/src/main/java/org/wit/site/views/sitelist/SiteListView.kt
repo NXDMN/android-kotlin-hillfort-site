@@ -17,7 +17,7 @@ class SiteListView: BaseView(), SiteListener {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_site_list)
 
-    init(toolbar)
+    super.init(toolbar, false)
 
     presenter = initPresenter(SiteListPresenter(this)) as SiteListPresenter
 
@@ -40,6 +40,7 @@ class SiteListView: BaseView(), SiteListener {
     when (item?.itemId) {
       R.id.item_add -> presenter.doAddSite()
       R.id.item_map -> presenter.doShowSitesMap()
+      R.id.item_logout ->presenter.doLogout()
     }
     return super.onOptionsItemSelected(item)
   }

@@ -11,6 +11,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.site.R
 import org.wit.site.helpers.readImageFromPath
+import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.BaseView
 
@@ -23,7 +24,7 @@ class SiteView : BaseView(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_site)
-    init(toolbarAdd)
+    super.init(toolbarAdd, true)
 
     presenter = initPresenter(SitePresenter(this)) as SitePresenter
 
@@ -36,10 +37,10 @@ class SiteView : BaseView(), AnkoLogger {
 
     visited.setOnCheckedChangeListener() { buttonView, isChecked ->
       if (isChecked) {
-        dateVisited.setVisibility(View.VISIBLE)
+        dateVisited.visibility = View.VISIBLE
       }
       else{
-        dateVisited.setVisibility(View.INVISIBLE)
+        dateVisited.visibility = View.INVISIBLE
         dateVisited.text.clear()
       }
     }
@@ -55,21 +56,25 @@ class SiteView : BaseView(), AnkoLogger {
   }
 
   override fun showSite(site: SiteModel){
-    siteName.setText(site.name)
-    description.setText(site.description)
-    visited.setChecked(site.visited)
+    if(siteName.text.isEmpty()) siteName.setText(site.name)
+    if(description.text.isEmpty()) description.setText(site.description)
+    if(!visited.isChecked) visited.setChecked(site.visited)
     if (visited.isChecked) {
-      dateVisited.setVisibility(View.VISIBLE)
+      dateVisited.visibility = View.VISIBLE
     }
-    dateVisited.setText(site.date)
-    additionalNotes.setText(site.notes)
+    if(dateVisited.text.isEmpty()) dateVisited.setText(site.date)
+    if(additionalNotes.text.isEmpty()) additionalNotes.setText(site.notes)
     siteImage.setImageBitmap(readImageFromPath(this, site.image))
+
     if (site.image != null) {
       chooseImage.setText(R.string.change_site_image)
     }
-    lat.setText("%.6f".format(site.lat))
-    lng.setText("%.6f".format(site.lng))
+    this.showLocation(site.location)
   }
+
+  override fun showLocation(location: Location) {
+    lat.setText("%.6f".format(location.lat))
+    lng.setText("%.6f".format(location.lng))  }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu_site, menu)

@@ -1,7 +1,9 @@
-package org.wit.site.models
+package org.wit.site.models.mem
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.wit.site.models.SiteModel
+import org.wit.site.models.SiteStore
 
 var lastId = 0L
 
@@ -32,9 +34,7 @@ class SiteMemStore: SiteStore, AnkoLogger {
             foundSite.date = site.date
             foundSite.notes = site.notes
             foundSite.image = site.image
-            foundSite.lat = site.lat
-            foundSite.lng = site.lng
-            foundSite.zoom = site.zoom
+            foundSite.location = site.location
             logAll()
         }
     }
