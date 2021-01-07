@@ -1,5 +1,6 @@
 package org.wit.site.views.sitelist
 
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.wit.site.models.SiteModel
@@ -22,7 +23,12 @@ class SiteListPresenter(view: BaseView) : BasePresenter(view) {
   }
 
   fun doLogout() {
+    FirebaseAuth.getInstance().signOut()
     view?.navigateTo(VIEW.LOGIN)
+  }
+
+  fun doSettings(){
+    view?.navigateTo(VIEW.SETTINGS)
   }
 
   fun loadSites() {

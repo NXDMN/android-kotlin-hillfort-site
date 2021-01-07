@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <PreferenceCategory android:title="Account">
+        <Preference
+            android:key="email"
+            android:title="Email"
+            app:useSimpleSummaryProvider="true"/>
+
+        <Preference
+            android:key="password"
+            android:title="Password"
+            app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Summary Statistics">
+        <Preference
+            android:key="totalSites"
+            android:title="Total number of sites"
+            app:useSimpleSummaryProvider="true"/>
+
+        <Preference
+            android:key="visitedSites"
+            android:title="Number of sites visited"
+            app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

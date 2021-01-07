@@ -35,15 +35,14 @@
     <activity
         android:name=".views.sitelist.SiteListView"
         android:label="@string/title_activity_site_list"
-        android:launchMode="singleTop">
-    </activity>
+        android:launchMode="singleTop"/>
 
     <activity
         android:name=".views.site.SiteView"
         android:label="@string/title_activity_site">
       <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".views.sitelist.SiteListView"/>
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".views.sitelist.SiteListView" />
     </activity>
 
     <activity
@@ -51,7 +50,7 @@
         android:label="@string/title_activity_map">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value=".views.sitelist.SiteListView"/>
+          android:value=".views.sitelist.SiteListView" />
     </activity>
 
     <activity
@@ -60,13 +59,21 @@
         android:launchMode="singleTop">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value=".views.sitelist.SiteListView"/>
+          android:value=".views.sitelist.SiteListView" />
+    </activity>
+
+    <activity
+        android:name=".views.settings.SettingsView"
+        android:label="@string/title_activity_settings"
+        android:launchMode="singleTop">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".views.sitelist.SiteListView" />
     </activity>
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />
-
   </application>
 
 </manifest>
