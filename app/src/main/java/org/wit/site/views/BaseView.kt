@@ -14,8 +14,11 @@ import org.wit.site.views.settings.SettingsView
 import org.wit.site.views.site.SiteView
 import org.wit.site.views.sitelist.SiteListView
 
-val IMAGE_REQUEST = 1
-val LOCATION_REQUEST = 2
+val IMAGE_REQUEST1 = 1
+val IMAGE_REQUEST2 = 2
+val IMAGE_REQUEST3 = 3
+val IMAGE_REQUEST4 = 4
+val LOCATION_REQUEST = 5
 
 enum class VIEW {
   LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS

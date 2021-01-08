@@ -5,7 +5,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.wit.site.main.MainApp
 
-
 class SettingsPresenter(view: SettingsFragment){
 
   var app: MainApp

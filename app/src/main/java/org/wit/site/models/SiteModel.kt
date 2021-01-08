@@ -15,6 +15,9 @@ data class SiteModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                      var date: String = "",
                      var notes: String = "",
                      var image: String = "",
+                     var image2: String = "",
+                     var image3: String = "",
+                     var image4: String = "",
                      @Embedded var location : Location = Location()) : Parcelable
 
 @Parcelize

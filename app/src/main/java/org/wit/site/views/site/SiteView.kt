@@ -1,10 +1,12 @@
 package org.wit.site.views.site
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
@@ -13,7 +15,7 @@ import org.wit.site.R
 import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
-import org.wit.site.views.BaseView
+import org.wit.site.views.*
 
 class SiteView : BaseView(), AnkoLogger {
 
@@ -51,8 +53,36 @@ class SiteView : BaseView(), AnkoLogger {
                           visited.isChecked,
                           dateVisited.text.toString(),
                           additionalNotes.text.toString())
-      presenter.doSelectImage()
+      presenter.doSelectImage(IMAGE_REQUEST1)
     }
+
+    chooseImage2.setOnClickListener {
+      presenter.cacheSite(siteName.text.toString(),
+          description.text.toString(),
+          visited.isChecked,
+          dateVisited.text.toString(),
+          additionalNotes.text.toString())
+      presenter.doSelectImage(IMAGE_REQUEST2)
+    }
+
+    chooseImage3.setOnClickListener {
+      presenter.cacheSite(siteName.text.toString(),
+          description.text.toString(),
+          visited.isChecked,
+          dateVisited.text.toString(),
+          additionalNotes.text.toString())
+      presenter.doSelectImage(IMAGE_REQUEST3)
+    }
+
+    chooseImage4.setOnClickListener {
+      presenter.cacheSite(siteName.text.toString(),
+          description.text.toString(),
+          visited.isChecked,
+          dateVisited.text.toString(),
+          additionalNotes.text.toString())
+      presenter.doSelectImage(IMAGE_REQUEST4)
+    }
+
   }
 
   override fun showSite(site: SiteModel){
@@ -65,16 +95,29 @@ class SiteView : BaseView(), AnkoLogger {
     if(dateVisited.text.isEmpty()) dateVisited.setText(site.date)
     if(additionalNotes.text.isEmpty()) additionalNotes.setText(site.notes)
     siteImage.setImageBitmap(readImageFromPath(this, site.image))
+    siteImage2.setImageBitmap(readImageFromPath(this, site.image2))
+    siteImage3.setImageBitmap(readImageFromPath(this, site.image3))
+    siteImage4.setImageBitmap(readImageFromPath(this, site.image4))
 
-    if (site.image != null) {
+    if (site.image != "") {
       chooseImage.setText(R.string.change_site_image)
+    }
+    if (site.image2 != "") {
+      chooseImage2.setText(R.string.change_site_image)
+    }
+    if (site.image3 != "") {
+      chooseImage3.setText(R.string.change_site_image)
+    }
+    if (site.image4 != "") {
+      chooseImage4.setText(R.string.change_site_image)
     }
     this.showLocation(site.location)
   }
 
   override fun showLocation(location: Location) {
     lat.setText("%.6f".format(location.lat))
-    lng.setText("%.6f".format(location.lng))  }
+    lng.setText("%.6f".format(location.lng))
+  }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.menu_site, menu)

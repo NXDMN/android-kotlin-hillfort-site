@@ -95,9 +95,9 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
     }
   }
 
-  fun doSelectImage() {
+  fun doSelectImage(code: Int) {
     view?.let {
-      showImagePicker(view!!, IMAGE_REQUEST)
+      showImagePicker(view!!, code)
     }
   }
 
@@ -137,8 +137,20 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
 
   override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
     when (requestCode) {
-      IMAGE_REQUEST -> {
+      IMAGE_REQUEST1 -> {
         site.image = data.data.toString()
+        view?.showSite(site)
+      }
+      IMAGE_REQUEST2 -> {
+        site.image2 = data.data.toString()
+        view?.showSite(site)
+      }
+      IMAGE_REQUEST3 -> {
+        site.image3 = data.data.toString()
+        view?.showSite(site)
+      }
+      IMAGE_REQUEST4 -> {
+        site.image4 = data.data.toString()
         view?.showSite(site)
       }
       LOCATION_REQUEST -> {
