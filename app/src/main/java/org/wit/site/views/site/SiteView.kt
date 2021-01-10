@@ -1,12 +1,10 @@
 package org.wit.site.views.site
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
@@ -16,6 +14,7 @@ import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.*
+
 
 class SiteView : BaseView(), AnkoLogger {
 
@@ -49,10 +48,12 @@ class SiteView : BaseView(), AnkoLogger {
 
     chooseImage.setOnClickListener {
       presenter.cacheSite(siteName.text.toString(),
-                          description.text.toString(),
-                          visited.isChecked,
-                          dateVisited.text.toString(),
-                          additionalNotes.text.toString())
+          description.text.toString(),
+          visited.isChecked,
+          dateVisited.text.toString(),
+          additionalNotes.text.toString(),
+          siteRate.rating,
+          favourite.isChecked)
       presenter.doSelectImage(IMAGE_REQUEST1)
     }
 
@@ -61,7 +62,9 @@ class SiteView : BaseView(), AnkoLogger {
           description.text.toString(),
           visited.isChecked,
           dateVisited.text.toString(),
-          additionalNotes.text.toString())
+          additionalNotes.text.toString(),
+          siteRate.rating,
+          favourite.isChecked)
       presenter.doSelectImage(IMAGE_REQUEST2)
     }
 
@@ -70,7 +73,9 @@ class SiteView : BaseView(), AnkoLogger {
           description.text.toString(),
           visited.isChecked,
           dateVisited.text.toString(),
-          additionalNotes.text.toString())
+          additionalNotes.text.toString(),
+          siteRate.rating,
+          favourite.isChecked)
       presenter.doSelectImage(IMAGE_REQUEST3)
     }
 
@@ -79,7 +84,9 @@ class SiteView : BaseView(), AnkoLogger {
           description.text.toString(),
           visited.isChecked,
           dateVisited.text.toString(),
-          additionalNotes.text.toString())
+          additionalNotes.text.toString(),
+          siteRate.rating,
+          favourite.isChecked)
       presenter.doSelectImage(IMAGE_REQUEST4)
     }
 
@@ -94,6 +101,8 @@ class SiteView : BaseView(), AnkoLogger {
     }
     if(dateVisited.text.isEmpty()) dateVisited.setText(site.date)
     if(additionalNotes.text.isEmpty()) additionalNotes.setText(site.notes)
+    siteRate.rating = site.rating
+    if(!favourite.isChecked) favourite.setChecked(site.favourite)
     siteImage.setImageBitmap(readImageFromPath(this, site.image))
     siteImage2.setImageBitmap(readImageFromPath(this, site.image2))
     siteImage3.setImageBitmap(readImageFromPath(this, site.image3))
@@ -135,11 +144,16 @@ class SiteView : BaseView(), AnkoLogger {
           toast(R.string.enter_site_name)
         } else {
           presenter.doAddOrSave(siteName.text.toString(),
-                                description.text.toString(),
-                                visited.isChecked,
-                                dateVisited.text.toString(),
-                                additionalNotes.text.toString())
+              description.text.toString(),
+              visited.isChecked,
+              dateVisited.text.toString(),
+              additionalNotes.text.toString(),
+              siteRate.rating,
+              favourite.isChecked)
         }
+      }
+      R.id.item_share -> {
+        presenter.doShare()
       }
       R.id.item_cancel -> {
         finish()

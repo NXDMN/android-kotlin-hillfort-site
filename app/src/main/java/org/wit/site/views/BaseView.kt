@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
+import org.wit.site.views.favourite.FavouriteView
 import org.wit.site.views.location.EditLocationView
 import org.wit.site.views.login.LoginView
 import org.wit.site.views.map.SiteMapView
@@ -21,7 +22,7 @@ val IMAGE_REQUEST4 = 4
 val LOCATION_REQUEST = 5
 
 enum class VIEW {
-  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS
+  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS, FAVOURITE
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -37,6 +38,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.LIST -> intent = Intent(this, SiteListView::class.java)
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
       VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
+      VIEW.FAVOURITE -> intent = Intent(this, FavouriteView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)

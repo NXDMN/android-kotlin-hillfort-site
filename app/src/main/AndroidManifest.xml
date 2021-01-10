@@ -38,8 +38,25 @@
         android:launchMode="singleTop"/>
 
     <activity
+        android:name=".views.favourite.FavouriteView"
+        android:label="@string/title_activity_favourite"
+        android:launchMode="singleTop">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".views.sitelist.SiteListView" />
+    </activity>
+
+    <activity
         android:name=".views.site.SiteView"
         android:label="@string/title_activity_site">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="http"
+              android:host="www.example.com"
+              android:pathPrefix="/site" />
+      </intent-filter>
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".views.sitelist.SiteListView" />

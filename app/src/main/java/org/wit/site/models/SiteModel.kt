@@ -18,6 +18,8 @@ data class SiteModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                      var image2: String = "",
                      var image3: String = "",
                      var image4: String = "",
+                     var rating: Float = 0f,
+                     var favourite: Boolean = false,
                      @Embedded var location : Location = Location()) : Parcelable
 
 @Parcelize

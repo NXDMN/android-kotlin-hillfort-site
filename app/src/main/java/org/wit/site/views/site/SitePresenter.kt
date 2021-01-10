@@ -41,12 +41,14 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
     }
   }
 
-  fun doAddOrSave(name: String, description: String, visited: Boolean, date: String, notes: String) {
+  fun doAddOrSave(name: String, description: String, visited: Boolean, date: String, notes: String, rating: Float, favourite: Boolean) {
     site.name = name
     site.description = description
     site.visited = visited
     site.date = date
     site.notes = notes
+    site.rating = rating
+    site.favourite = favourite
     doAsync {
       if (edit) {
         app.sites.update(site)
@@ -59,12 +61,14 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
     }
   }
 
-  fun cacheSite (name: String, description: String, visited: Boolean, date: String, notes: String) {
+  fun cacheSite (name: String, description: String, visited: Boolean, date: String, notes: String, rating: Float, favourite: Boolean) {
     site.name = name;
     site.description = description
     site.visited = visited
     site.date = date
     site.notes = notes
+    site.rating = rating
+    site.favourite = favourite
   }
 
   fun doConfigureMap(m: GoogleMap) {
@@ -93,6 +97,14 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
         view?.finish()
       }
     }
+  }
+
+  fun doShare(){
+    val intent = Intent()
+    intent.type = "text/plain"
+    intent.action = Intent.ACTION_SEND
+    intent.putExtra(Intent.EXTRA_TEXT, "http://www.example.com/site")
+    view?.startActivity(Intent.createChooser(intent, "Share via"))
   }
 
   fun doSelectImage(code: Int) {
