@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
@@ -103,10 +104,10 @@ class SiteView : BaseView(), AnkoLogger {
     if(additionalNotes.text.isEmpty()) additionalNotes.setText(site.notes)
     siteRate.rating = site.rating
     if(!favourite.isChecked) favourite.setChecked(site.favourite)
-    siteImage.setImageBitmap(readImageFromPath(this, site.image))
-    siteImage2.setImageBitmap(readImageFromPath(this, site.image2))
-    siteImage3.setImageBitmap(readImageFromPath(this, site.image3))
-    siteImage4.setImageBitmap(readImageFromPath(this, site.image4))
+    Glide.with(this).load(site.image).into(siteImage)
+    Glide.with(this).load(site.image2).into(siteImage2)
+    Glide.with(this).load(site.image3).into(siteImage3)
+    Glide.with(this).load(site.image4).into(siteImage4)
 
     if (site.image != "") {
       chooseImage.setText(R.string.change_site_image)
@@ -191,7 +192,7 @@ class SiteView : BaseView(), AnkoLogger {
   override fun onResume() {
     super.onResume()
     mapView.onResume()
-    presenter.doResartLocationUpdates()
+    presenter.doRestartLocationUpdates()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {

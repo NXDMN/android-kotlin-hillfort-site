@@ -34,7 +34,12 @@ class SiteMemStore: SiteStore, AnkoLogger {
             foundSite.date = site.date
             foundSite.notes = site.notes
             foundSite.image = site.image
+            foundSite.image2 = site.image2
+            foundSite.image3 = site.image3
+            foundSite.image4 = site.image4
             foundSite.location = site.location
+            foundSite.rating = site.rating
+            foundSite.favourite = site.favourite
             logAll()
         }
     }
@@ -46,6 +51,10 @@ class SiteMemStore: SiteStore, AnkoLogger {
     override fun findById(id:Long) : SiteModel? {
         val foundSite: SiteModel? = sites.find { it.id == id }
         return foundSite
+    }
+
+    override fun clear() {
+        sites.clear()
     }
 
     fun logAll(){

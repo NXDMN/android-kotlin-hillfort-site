@@ -28,6 +28,7 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
   var map: GoogleMap? = null
   var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
   val locationRequest = createDefaultLocationRequest()
+  var locationManuallyChanged = false;
 
   init{
     if (view.intent.hasExtra("site_edit")) {
@@ -114,6 +115,7 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
   }
 
   fun doSetLocation() {
+    locationManuallyChanged = true
     view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(site.location.lat, site.location.lng, site.location.zoom))
   }
 
@@ -125,12 +127,14 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
   }
 
   @SuppressLint("MissingPermission")
-  fun doResartLocationUpdates() {
+  fun doRestartLocationUpdates() {
     var locationCallback = object : LocationCallback() {
       override fun onLocationResult(locationResult: LocationResult?) {
         if (locationResult != null && locationResult.locations != null) {
           val l = locationResult.locations.last()
-          locationUpdate(Location(l.latitude, l.longitude))
+          if(!locationManuallyChanged) {
+            locationUpdate(Location(l.latitude, l.longitude))
+          }
         }
       }
     }

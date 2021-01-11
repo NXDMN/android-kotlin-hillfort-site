@@ -1,6 +1,7 @@
 package org.wit.site.views.map
 
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_site_maps.*
@@ -32,7 +33,7 @@ class SiteMapView : BaseView(), GoogleMap.OnMarkerClickListener {
   override fun showSite(site: SiteModel){
     currentName.text = site.name
     currentDescription.text = site.description
-    currentImage.setImageBitmap(readImageFromPath(this, site.image))
+    Glide.with(this).load(site.image).into(currentImage)
   }
 
   override fun showSites(sites: List<SiteModel>) {
