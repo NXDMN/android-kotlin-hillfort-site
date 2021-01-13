@@ -3,6 +3,7 @@ package org.wit.site.views.sitelist
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_site_list.*
 import org.wit.site.R
@@ -33,6 +34,25 @@ class SiteListView: BaseView(), SiteListener {
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
+
+    val searchView = menu?.findItem(R.id.item_search)?.actionView as SearchView
+    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+      override fun onQueryTextSubmit(query: String): Boolean {
+        if(!searchView.isIconified()) {
+          searchView.setIconified(true)
+        }
+        menu.findItem(R.id.item_search).collapseActionView()
+        presenter.searchSites(query)
+        return false
+      }
+
+      override fun onQueryTextChange(newText: String): Boolean {
+        presenter.searchSites(newText)
+        return false
+      }
+    })
+
+
     return super.onCreateOptionsMenu(menu)
   }
 
@@ -40,7 +60,7 @@ class SiteListView: BaseView(), SiteListener {
     when (item?.itemId) {
       R.id.item_add -> presenter.doAddSite()
       R.id.item_map -> presenter.doShowSitesMap()
-      R.id.item_logout ->presenter.doLogout()
+      R.id.item_logout -> presenter.doLogout()
       R.id.item_settings -> presenter.doSettings()
       R.id.item_favourite -> presenter.doFavourite()
     }

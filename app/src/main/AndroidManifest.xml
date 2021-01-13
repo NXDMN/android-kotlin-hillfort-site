@@ -34,7 +34,7 @@
 
     <activity
         android:name=".views.sitelist.SiteListView"
-        android:label="@string/title_activity_site_list"
+        android:label="@string/app_name"
         android:launchMode="singleTop"/>
 
     <activity

@@ -44,4 +44,13 @@ class SiteListPresenter(view: BaseView) : BasePresenter(view) {
       }
     }
   }
+
+  fun searchSites(text: String) {
+    doAsync {
+      val sites = app.sites.findAll().filter { it.name.toLowerCase().contains(text.toLowerCase()) }
+      uiThread {
+        view?.showSites(sites)
+      }
+    }
+  }
 }

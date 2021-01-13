@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.card_site.view.*
 import org.wit.site.R
-import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.SiteModel
 
 interface SiteListener {
@@ -49,4 +48,5 @@ class SiteAdapter constructor(
             itemView.setOnClickListener{listener.onSiteClick(site)}
         }
     }
+
 }

@@ -3,7 +3,6 @@
   <string name="app_name">Hillfort Sites</string>
   <string name="title_activity_map">Map</string>
   <string name="title_activity_site_maps">Map for all sites</string>
-  <string name="title_activity_site_list">Sites</string>
   <string name="title_activity_site">Site</string>
   <string name="title_activity_login"> Signup/Login to Site</string>
   <string name="title_activity_settings">Settings</string>
@@ -22,6 +21,7 @@
   <string name="menu_logout">Logout</string>
   <string name="menu_settings">Settings</string>
   <string name="menu_favourite">Favourites</string>
+  <string name="menu_search">Search</string>
   <!--  menu_site.xml-->
   <string name="menu_cancelSite">Cancel</string>
   <string name="menu_deleteSite">Delete</string>
