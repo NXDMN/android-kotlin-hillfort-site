@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_site.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.site.R
-import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.*

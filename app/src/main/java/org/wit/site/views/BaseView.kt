@@ -11,6 +11,7 @@ import org.wit.site.views.favourite.FavouriteView
 import org.wit.site.views.location.EditLocationView
 import org.wit.site.views.login.LoginView
 import org.wit.site.views.map.SiteMapView
+import org.wit.site.views.navigator.SiteNavigatorView
 import org.wit.site.views.settings.SettingsView
 import org.wit.site.views.site.SiteView
 import org.wit.site.views.sitelist.SiteListView
@@ -22,7 +23,7 @@ val IMAGE_REQUEST4 = 4
 val LOCATION_REQUEST = 5
 
 enum class VIEW {
-  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS, FAVOURITE
+  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS, FAVOURITE, NAVIGATOR
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -39,6 +40,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
       VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
       VIEW.FAVOURITE -> intent = Intent(this, FavouriteView::class.java)
+      VIEW.NAVIGATOR -> intent = Intent(this, SiteNavigatorView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)

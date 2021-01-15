@@ -36,6 +36,10 @@ class SiteListPresenter(view: BaseView) : BasePresenter(view) {
     view?.navigateTo(VIEW.FAVOURITE)
   }
 
+  fun doNavigator(){
+    view?.navigateTo(VIEW.NAVIGATOR)
+  }
+
   fun loadSites() {
     doAsync {
       val sites = app.sites.findAll()

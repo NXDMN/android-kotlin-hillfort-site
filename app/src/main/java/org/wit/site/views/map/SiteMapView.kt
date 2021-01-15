@@ -6,7 +6,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_site_maps.*
 import org.wit.site.R
-import org.wit.site.helpers.readImageFromPath
 import org.wit.site.models.SiteModel
 import org.wit.site.views.BaseView
 

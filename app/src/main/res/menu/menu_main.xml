@@ -22,6 +22,13 @@
     app:showAsAction="ifRoom"/>
 
   <item
+    android:id="@+id/item_navigator"
+    android:title="@string/menu_navigator"
+    android:orderInCategory="30"
+    android:visible="true"
+    app:showAsAction="never"/>
+
+  <item
     android:id="@+id/item_logout"
     android:title="@string/menu_logout"
     android:orderInCategory="100"

@@ -63,6 +63,7 @@ class SiteListView: BaseView(), SiteListener {
       R.id.item_logout -> presenter.doLogout()
       R.id.item_settings -> presenter.doSettings()
       R.id.item_favourite -> presenter.doFavourite()
+      R.id.item_navigator -> presenter.doNavigator()
     }
     return super.onOptionsItemSelected(item)
   }
