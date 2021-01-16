@@ -33,7 +33,7 @@
         android:id="@+id/lat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="196dp"
         android:layout_marginTop="68dp"
         android:text="00.000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +52,8 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="360dp"
-        android:layout_height="533dp"
+        android:layout_width="586dp"
+        android:layout_height="227dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
