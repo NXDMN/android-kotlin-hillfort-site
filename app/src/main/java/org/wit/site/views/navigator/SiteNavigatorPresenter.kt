@@ -73,12 +73,9 @@ class SiteNavigatorPresenter(view: BaseView) : BasePresenter(view) {
       destLocation = LatLng(site.location.lat, site.location.lng)
 
       if (currentLocation != null) {
+        centerCurrent = false
         getDirection()
-      } else {
-        view?.toast("Cannot get current location")
       }
-    }else{
-      view?.toast("Cannot select current location marker")
     }
   }
 
@@ -116,7 +113,6 @@ class SiteNavigatorPresenter(view: BaseView) : BasePresenter(view) {
   }
 
   fun getDirection(){
-    centerCurrent = false
     val options = PolylineOptions()
     options.color(Color.BLUE)
     options.width(13f)

@@ -1,7 +1,9 @@
 package org.wit.site.models.firebase
 
+import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -60,18 +62,8 @@ class SiteFireStore(val context: Context): SiteStore, AnkoLogger {
     }
 
     db.child("users").child(userId).child("sites").child(site.fbId).setValue(site)
-    if((site.image.length) > 0 && (site.image[0] != 'h')){
-      updateImage(site, site.image)
-    }
-    if((site.image2.length) > 0 && (site.image2[0] != 'h')){
-      updateImage(site, site.image2)
-    }
-    if((site.image3.length) > 0 && (site.image3[0] != 'h')){
-      updateImage(site, site.image3)
-    }
-    if((site.image4.length) > 0 && (site.image4[0] != 'h')){
-      updateImage(site, site.image4)
-    }
+    checkImages(site)
+
   }
 
   override fun delete(site: SiteModel) {
@@ -96,7 +88,38 @@ class SiteFireStore(val context: Context): SiteStore, AnkoLogger {
     db = FirebaseDatabase.getInstance().reference
     st = FirebaseStorage.getInstance().reference
     sites.clear()
+    val connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected")
+    connectedRef.addValueEventListener(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        val connected = snapshot.getValue(Boolean::class.java) ?: false
+        if (connected) {
+          Log.d(ContentValues.TAG, "Connected")
+          sites.forEach { checkImages(it) }
+        } else {
+          Log.d(ContentValues.TAG, "Disconnected")
+        }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+        Log.w(ContentValues.TAG, "Listener was cancelled")
+      }
+    })
     db.child("users").child(userId).child("sites").addListenerForSingleValueEvent(valueEventListener)
+  }
+
+  fun checkImages(site: SiteModel){
+    if((site.image.length) > 0 && (site.image[0] != 'h')){
+      updateImage(site, site.image)
+    }
+    if((site.image2.length) > 0 && (site.image2[0] != 'h')){
+      updateImage(site, site.image2)
+    }
+    if((site.image3.length) > 0 && (site.image3[0] != 'h')){
+      updateImage(site, site.image3)
+    }
+    if((site.image4.length) > 0 && (site.image4[0] != 'h')){
+      updateImage(site, site.image4)
+    }
   }
 
   fun updateImage(site: SiteModel, image: String){
