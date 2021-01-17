@@ -1,10 +1,21 @@
 package org.wit.site.views.site
 
 import android.content.Intent
+import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_site.*
@@ -14,6 +25,11 @@ import org.wit.site.R
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.*
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 class SiteView : BaseView(), AnkoLogger {
@@ -54,7 +70,8 @@ class SiteView : BaseView(), AnkoLogger {
           additionalNotes.text.toString(),
           siteRate.rating,
           favourite.isChecked)
-      presenter.doSelectImage(IMAGE_REQUEST1)
+
+      openDialog(CAMERA_REQUEST1, IMAGE_REQUEST1)
     }
 
     chooseImage2.setOnClickListener {
@@ -65,7 +82,8 @@ class SiteView : BaseView(), AnkoLogger {
           additionalNotes.text.toString(),
           siteRate.rating,
           favourite.isChecked)
-      presenter.doSelectImage(IMAGE_REQUEST2)
+
+      openDialog(CAMERA_REQUEST2, IMAGE_REQUEST2)
     }
 
     chooseImage3.setOnClickListener {
@@ -76,7 +94,8 @@ class SiteView : BaseView(), AnkoLogger {
           additionalNotes.text.toString(),
           siteRate.rating,
           favourite.isChecked)
-      presenter.doSelectImage(IMAGE_REQUEST3)
+
+      openDialog(CAMERA_REQUEST3, IMAGE_REQUEST3)
     }
 
     chooseImage4.setOnClickListener {
@@ -87,9 +106,26 @@ class SiteView : BaseView(), AnkoLogger {
           additionalNotes.text.toString(),
           siteRate.rating,
           favourite.isChecked)
-      presenter.doSelectImage(IMAGE_REQUEST4)
+
+      openDialog(CAMERA_REQUEST4, IMAGE_REQUEST4)
     }
 
+  }
+
+  fun openDialog(camera: Int, image: Int){
+    val items = arrayOf("Camera", "Gallery", "Cancel")
+    val builder = AlertDialog.Builder(this)
+    with(builder){
+      setTitle("Add from")
+      setItems(items){ dialog, which ->
+        when(which) {
+          0 -> presenter.doImageFromCamera(camera)
+          1 -> presenter.doSelectImage(image)
+          2 -> dialog.dismiss()
+        }
+      }
+      show()
+    }
   }
 
   override fun showSite(site: SiteModel){

@@ -1,7 +1,13 @@
 package org.wit.site.views.site
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
+import androidx.camera.core.CameraSelector
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -12,13 +18,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import org.wit.site.helpers.checkLocationPermissions
-import org.wit.site.helpers.createDefaultLocationRequest
-import org.wit.site.helpers.isPermissionGranted
-import org.wit.site.helpers.showImagePicker
+import org.wit.site.R
+import org.wit.site.helpers.*
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.*
+import java.io.File
 
 class SitePresenter(view: BaseView) : BasePresenter(view) {
 
@@ -114,6 +119,10 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
     }
   }
 
+  fun doImageFromCamera(code: Int){
+    view?.navigateTo(VIEW.CAMERA, code)
+  }
+
   fun doSetLocation() {
     locationManuallyChanged = true
     view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(site.location.lat, site.location.lng, site.location.zoom))
@@ -144,7 +153,7 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
   }
 
   override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-    if (isPermissionGranted(requestCode, grantResults)) {
+    if (isLocationPermissionGranted(requestCode, grantResults)) {
       doSetCurrentLocation()
     } else {
       locationUpdate(defaultLocation)
@@ -173,6 +182,26 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
         val location = data.extras?.getParcelable<Location>("location")!!
         site.location = location
         locationUpdate(location)
+      }
+      CAMERA_REQUEST1 -> {
+        val image = data.extras?.getParcelable<Uri>("image")!!
+        site.image = image.toString()
+        view?.showSite(site)
+      }
+      CAMERA_REQUEST2 -> {
+        val image = data.extras?.getParcelable<Uri>("image")!!
+        site.image2 = image.toString()
+        view?.showSite(site)
+      }
+      CAMERA_REQUEST3 -> {
+        val image = data.extras?.getParcelable<Uri>("image")!!
+        site.image3 = image.toString()
+        view?.showSite(site)
+      }
+      CAMERA_REQUEST4 -> {
+        val image = data.extras?.getParcelable<Uri>("image")!!
+        site.image4 = image.toString()
+        view?.showSite(site)
       }
     }
   }

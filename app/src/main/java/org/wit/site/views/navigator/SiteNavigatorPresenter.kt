@@ -40,7 +40,7 @@ class SiteNavigatorPresenter(view: BaseView) : BasePresenter(view) {
   }
 
   override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-    if (isPermissionGranted(requestCode, grantResults)) {
+    if (isLocationPermissionGranted(requestCode, grantResults)) {
       doSetCurrentLocation()
     } else {
       addCurrentLocation(defaultLocation)

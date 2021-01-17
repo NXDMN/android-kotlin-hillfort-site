@@ -12,6 +12,7 @@ import org.wit.site.views.location.EditLocationView
 import org.wit.site.views.login.LoginView
 import org.wit.site.views.map.SiteMapView
 import org.wit.site.views.navigator.SiteNavigatorView
+import org.wit.site.views.photo.CameraPhotoView
 import org.wit.site.views.settings.SettingsView
 import org.wit.site.views.site.SiteView
 import org.wit.site.views.sitelist.SiteListView
@@ -20,10 +21,14 @@ val IMAGE_REQUEST1 = 1
 val IMAGE_REQUEST2 = 2
 val IMAGE_REQUEST3 = 3
 val IMAGE_REQUEST4 = 4
+val CAMERA_REQUEST1 = 11
+val CAMERA_REQUEST2 = 22
+val CAMERA_REQUEST3 = 33
+val CAMERA_REQUEST4 = 44
 val LOCATION_REQUEST = 5
 
 enum class VIEW {
-  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS, FAVOURITE, NAVIGATOR
+  LOCATION, SITE, MAPS, LIST, LOGIN, SETTINGS, FAVOURITE, NAVIGATOR, CAMERA
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -41,6 +46,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
       VIEW.FAVOURITE -> intent = Intent(this, FavouriteView::class.java)
       VIEW.NAVIGATOR -> intent = Intent(this, SiteNavigatorView::class.java)
+      VIEW.CAMERA -> intent = Intent(this, CameraPhotoView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
@@ -81,4 +87,5 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
   open fun showLocation(location: Location) {}
   open fun showProgress() {}
   open fun hideProgress() {}
+  open fun startCamera() {}
 }

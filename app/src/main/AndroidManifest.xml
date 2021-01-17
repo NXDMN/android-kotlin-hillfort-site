@@ -4,6 +4,8 @@
 
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-feature android:name="android.hardware.camera.any" />
+  <uses-permission android:name="android.permission.CAMERA" />
 
   <application
       android:name=".main.MainApp"
@@ -70,6 +72,8 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".views.sitelist.SiteListView" />
     </activity>
+
+    <activity android:name=".views.photo.CameraPhotoView"/>
 
     <activity
         android:name=".views.map.SiteMapView"

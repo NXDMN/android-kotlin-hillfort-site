@@ -1,14 +1,20 @@
 package org.wit.site.helpers
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
+import androidx.core.app.ActivityCompat
 import org.wit.site.R
 import java.io.IOException
+
+val REQUEST_CAMERA_PERMISSIONS_REQUEST_CODE = 55
 
 fun showImagePicker(parent: Activity, id: Int) {
   val intent = Intent()
@@ -44,5 +50,30 @@ fun readImageFromPath(context: Context, path : String) : Bitmap? {
     }
   }
   return bitmap
+}
+
+fun checkCameraPermissions(activity: Activity) : Boolean {
+  if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+    return true
+  }
+  else {
+    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSIONS_REQUEST_CODE)
+    return false
+  }
+}
+
+fun isCameraPermissionGranted(code: Int, grantResults: IntArray): Boolean {
+  var permissionGranted = false;
+  if (code == REQUEST_CAMERA_PERMISSIONS_REQUEST_CODE) {
+    when {
+      grantResults.isEmpty() -> Log.i("Camera", "User interaction was cancelled.")
+      (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> {
+        permissionGranted = true
+        Log.i("Camera", "Permission Granted.")
+      }
+      else -> Log.i("Camera", "Permission Denied.")
+    }
+  }
+  return permissionGranted
 }
 
