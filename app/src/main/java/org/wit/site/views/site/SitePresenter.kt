@@ -1,13 +1,8 @@
 package org.wit.site.views.site
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
-import androidx.camera.core.CameraSelector
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -18,13 +13,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import org.wit.site.R
 import org.wit.site.helpers.*
 import org.wit.site.models.Location
 import org.wit.site.models.SiteModel
 import org.wit.site.views.*
-import java.io.File
-
 class SitePresenter(view: BaseView) : BasePresenter(view) {
 
   var site = SiteModel()
@@ -109,7 +101,7 @@ class SitePresenter(view: BaseView) : BasePresenter(view) {
     val intent = Intent()
     intent.type = "text/plain"
     intent.action = Intent.ACTION_SEND
-    intent.putExtra(Intent.EXTRA_TEXT, "http://www.example.com/site")
+    intent.putExtra(Intent.EXTRA_TEXT, "http://www.example.com/site/${site.fbId}")
     view?.startActivity(Intent.createChooser(intent, "Share via"))
   }
 

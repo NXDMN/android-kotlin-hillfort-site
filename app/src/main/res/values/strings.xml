@@ -16,6 +16,11 @@
   <string name="button_addImage"> Add Image </string>
   <string name="hint_additionalNotes">Additional notes</string>
   <string name="favourite">Favourite</string>
+  <!--  activity_site_list.xml-->
+  <string name="search_by">Search by:</string>
+  <string name="search_name">Name</string>
+  <string name="search_desc">Description</string>
+  <string name="search_notes">Notes</string>
   <!--  menu_main.xml-->
   <string name="menu_addSite">Add</string>
   <string name="menu_showMap">Show Map</string>

@@ -3,6 +3,7 @@ package org.wit.site.views.sitelist
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_site_list.*
@@ -32,6 +33,17 @@ class SiteListView: BaseView(), SiteListener {
     recyclerView.adapter?.notifyDataSetChanged()
   }
 
+  fun checkChoice(): String?{
+    var choice: String? = null
+    val selectedId = radioGrp.checkedRadioButtonId
+    when(selectedId){
+      R.id.radioName -> choice = "name"
+      R.id.radioDesc -> choice = "desc"
+      R.id.radioNote -> choice = "note"
+    }
+    return choice
+  }
+
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
 
@@ -42,12 +54,12 @@ class SiteListView: BaseView(), SiteListener {
           searchView.setIconified(true)
         }
         menu.findItem(R.id.item_search).collapseActionView()
-        presenter.searchSites(query)
+        presenter.searchSites(checkChoice(), query)
         return false
       }
 
       override fun onQueryTextChange(newText: String): Boolean {
-        presenter.searchSites(newText)
+        presenter.searchSites(checkChoice(), newText)
         return false
       }
     })
