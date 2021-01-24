@@ -89,6 +89,8 @@ class SiteNavigatorPresenter(view: BaseView) : BasePresenter(view) {
     currentLocationMarker = map?.addMarker(options)
     if(centerCurrent)
       map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(loc.lat, loc.lng), 15f))
+    if(directions != null && destLocation != null)
+      getDirection()
     view?.showLocation(loc)
   }
 
@@ -116,7 +118,7 @@ class SiteNavigatorPresenter(view: BaseView) : BasePresenter(view) {
     val options = PolylineOptions()
     options.color(Color.BLUE)
     options.width(13f)
-    val url = getDirectionsUrl(currentLocation, destLocation)
+    val url = getDirectionsUrl(view!!, currentLocation, destLocation)
 
     doAsync {
       val result = URL(url).readText()

@@ -45,7 +45,6 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
   }
 
   fun updatePrefSummary(p: Preference?){
-
     when(p?.key) {
       "email" -> presenter.doGetEmail {summary -> p.setSummary(summary)}
       "password" -> p.setSummary("*******")

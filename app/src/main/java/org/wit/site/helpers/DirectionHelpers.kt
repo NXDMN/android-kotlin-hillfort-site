@@ -1,12 +1,13 @@
 package org.wit.site.helpers
 
+import android.app.Activity
 import com.google.android.gms.maps.model.LatLng
 import org.wit.site.R
 
-fun getDirectionsUrl(origin: LatLng?, dest: LatLng?): String{
+fun getDirectionsUrl(activity: Activity, origin: LatLng?, dest: LatLng?): String{
   val str_origin = "origin=" + origin?.latitude + "," + origin?.longitude
   val str_dest = "destination=" + dest?.latitude + "," + dest?.longitude
-  val key = "key=AIzaSyAcLB6_oJ4BALG2NNqxrARxLpDqTUBEXL4"
+  val key = "key=${activity.getString(R.string.google_maps_key)}"
 
   val parameters = "${str_origin}&${str_dest}&${key}"
 
